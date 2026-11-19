@@ -138,17 +138,32 @@ impl View {
         Change::Partial
     }
 
-    fn draw_tile(&self, canvas: &mut Canvas, cell: Rect, view: Tile) {
+    fn board_in_play(&self) -> bool {
+        self.panel.is_none() && matches!(self.game.status(), Status::Ready | Status::Playing)
+    }
+
+    fn board_position(&self, width: i32, x: f32, y: f32) -> Option<(usize, usize)> {
+        let (rows, columns, _) = self.game.difficulty().size();
+        (0..rows.min(VISIBLE))
+            .flat_map(|row| (0..columns.min(VISIBLE)).map(move |column| (row, column)))
+            .find(|&(row, column)| board_rect(width, rows, columns, row, column).contains(x, y))
+            .map(|(row, column)| (self.row + row, self.column + column))
+    }
+
+    fn draw_tile(&self, canvas: &mut Canvas, cell: Rect, view: Tile, accepts_taps: bool) {
         let dark_tile = matches!(view, Tile::Covered | Tile::Flag | Tile::MistakenFlag);
         let fill = if dark_tile { 239 } else { PAPER };
         let line = if dark_tile { BLACK } else { HAIRLINE };
-        let exploded = view == Tile::Exploded;
+        let pressed = accepts_taps
+            && matches!(view, Tile::Covered | Tile::Flag)
+            && canvas.control_pressed(cell, false);
+        let highlighted = pressed || view == Tile::Exploded;
         canvas.fill(cell, line);
         canvas.fill(
             cell.inset(canvas.px(2)),
-            if exploded { BLACK } else { fill },
+            if highlighted { BLACK } else { fill },
         );
-        let ink = if exploded { PAPER } else { BLACK };
+        let ink = if highlighted { PAPER } else { BLACK };
         let inside = |x, y, w, h| {
             Rect::new(
                 cell.x + canvas.px(x),
@@ -274,10 +289,16 @@ impl App for View {
             }
         };
         canvas.text(screen_rect(w, 40, 191, 1184, 44), notice, CAPTION);
+        let accepts_taps = self.board_in_play();
         for row in 0..rows.min(VISIBLE) {
             for column in 0..columns.min(VISIBLE) {
                 let view = self.game.view(self.row + row, self.column + column);
-                self.draw_tile(canvas, board_rect(w, rows, columns, row, column), view);
+                self.draw_tile(
+                    canvas,
+                    board_rect(w, rows, columns, row, column),
+                    view,
+                    accepts_taps,
+                );
             }
         }
         if rows > VISIBLE || columns > VISIBLE {
@@ -343,6 +364,22 @@ impl App for View {
                 false,
             );
         }
+    }
+
+    fn press_point(&self, input: Input) -> Option<(f32, f32)> {
+        let (x, y, held) = match input {
+            Input::Tap(x, y) => (x, y, false),
+            Input::LongTap(x, y) => (x, y, true),
+            _ => return None,
+        };
+        if self.board_in_play() {
+            if let Some((row, column)) = self.board_position(WIDTH as i32, x, y) {
+                let tile = self.game.view(row, column);
+                return (tile == Tile::Covered || (tile == Tile::Flag && (held || self.flag_mode)))
+                    .then_some((x, y));
+            }
+        }
+        (!held).then_some((x, y))
     }
 
     fn input(&mut self, input: Input) -> Change {
@@ -424,17 +461,8 @@ impl App for View {
                 }
             }
         }
-        let (rows, columns, _) = self.game.difficulty().size();
-        for row in 0..rows.min(VISIBLE) {
-            for column in 0..columns.min(VISIBLE) {
-                if board_rect(w, rows, columns, row, column).contains(x, y) {
-                    return self.choose(
-                        self.row + row,
-                        self.column + column,
-                        held || self.flag_mode,
-                    );
-                }
-            }
+        if let Some((row, column)) = self.board_position(w, x, y) {
+            return self.choose(row, column, held || self.flag_mode);
         }
         Change::None
     }
@@ -463,5 +491,27 @@ impl App for View {
             primitive_app::save(path, &serde_json::to_vec(&(snapshot, &self.records))?)?;
         }
         Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn hold_feedback_targets_only_a_tile_that_can_toggle_a_flag() {
+        let difficulty = Difficulty::Beginner;
+        let (rows, columns, _) = difficulty.size();
+        let mut view = View::new(Minefield::new(difficulty, 5), BestTimes::default(), None);
+        let cell = board_rect(WIDTH as i32, rows, columns, 0, 0);
+        let (x, y) = ((cell.x + cell.w / 2) as f32, (cell.y + cell.h / 2) as f32);
+        assert_eq!(view.press_point(Input::LongTap(x, y)), Some((x, y)));
+        assert_eq!(view.input(Input::LongTap(x, y)), Change::Partial);
+        assert_eq!(view.game.view(0, 0), Tile::Flag);
+        assert_eq!(view.press_point(Input::Tap(x, y)), None);
+        assert_eq!(view.press_point(Input::LongTap(x, y)), Some((x, y)));
+        assert_eq!(view.press_point(Input::LongTap(50.0, 50.0)), None);
+        view.panel = Some(Panel::NewGame);
+        assert_eq!(view.press_point(Input::LongTap(x, y)), None);
     }
 }
