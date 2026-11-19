@@ -43,7 +43,9 @@ The app uses fonts installed with Primitive Launcher. [Install guide](INSTALL.md
 ## Status
 
 Desktop tests and previews passed on macOS, and the ARMHF package passed the local Store fixture.
-Kindle hardware verification is pending. `app.json` contains the draft Store listing. [Device notes](docs/device-notes.md)
+On an ARMHF Kindle Oasis 3 running firmware 5.18.2, Minesweeper opened from Launcher, showed and closed Best
+times with the board unchanged, then returned to Launcher. `app.json` contains the draft Store listing. [Device
+notes](docs/device-notes.md)
 
 ## Develop locally
 
