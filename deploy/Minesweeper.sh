@@ -1,5 +1,5 @@
 #!/bin/sh
-# Name: Primitive Minesweeper
+# Name: Minesweeper
 # Author: Primitive AI
 # DontUseFBInk
 # PrimitiveUSBLease

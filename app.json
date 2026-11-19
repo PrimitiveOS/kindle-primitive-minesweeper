@@ -2,7 +2,7 @@
   "schema": 1,
   "id": "primitive-minesweeper",
   "dir": "minesweeper",
-  "name": "Primitive Minesweeper",
+  "name": "Minesweeper",
   "subtitle": "Clear a minefield on e-ink",
   "developer": {
     "name": "Primitive AI"

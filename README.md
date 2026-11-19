@@ -1,6 +1,6 @@
 <div align="center">
 
-# Primitive Minesweeper
+# Minesweeper
 
 **Minesweeper for jailbroken Kindle e-readers.**
 
@@ -37,7 +37,7 @@ Tap to reveal squares and hold to flag suspected mines. The first revealed squar
 ## Quick start
 
 For a local USB test, extract the ARMHF test package and copy the `minesweeper` and `documents` folders to the
-Kindle's user storage. Eject the Kindle and open Primitive Minesweeper from the Primitive Launcher grid.
+Kindle's user storage. Eject the Kindle and open Minesweeper from the Primitive Launcher grid.
 The app uses fonts installed with Primitive Launcher. [Install guide](INSTALL.md)
 
 ## Status
