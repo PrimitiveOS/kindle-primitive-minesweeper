@@ -36,9 +36,8 @@ Tap to reveal squares and hold to flag suspected mines. The first revealed squar
 
 ## Quick start
 
-For a local USB test, extract the ARMHF test package and copy the `minesweeper` and `documents` folders to the
-Kindle's user storage. Eject the Kindle and open Minesweeper from the Primitive Launcher grid.
-The app uses fonts installed with Primitive Launcher. [Install guide](INSTALL.md)
+After setting up PrimitiveOS, open **Store** from Primitive Launcher. Choose **Minesweeper** under **Apps**,
+tap **Get**, and open it from the Launcher grid. The [install guide](INSTALL.md) also covers local USB testing.
 
 ## Status
 
