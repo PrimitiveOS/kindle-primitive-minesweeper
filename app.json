@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "id": "primitive-minesweeper",
+  "dir": "minesweeper",
+  "name": "Primitive Minesweeper",
+  "subtitle": "Clear a minefield on e-ink",
+  "developer": {
+    "name": "Primitive AI"
+  },
+  "categories": [
+    "games"
+  ],
+  "description": "Play three classic board sizes and track your best times. Tap to reveal and hold a square to flag it. The first square is safe, and larger boards can be explored by swiping.",
+  "repo": "https://github.com/DoanNguyenTrong/kindle-primitive-minesweeper",
+  "licence": "PolyForm-Noncommercial-1.0.0",
+  "source": "hosted",
+  "icon": "icon.png",
+  "changes": {
+    "network": false,
+    "stops_kindle_ui": false,
+    "starts_at_boot": false,
+    "root_filesystem": false,
+    "hooks": false
+  },
+  "versions": []
+}

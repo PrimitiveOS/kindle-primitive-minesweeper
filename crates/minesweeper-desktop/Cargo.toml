@@ -1,0 +1,11 @@
+[package]
+name = "minesweeper-desktop"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+minesweeper-core.workspace = true
+minesweeper-render.workspace = true
+primitive-app.workspace = true
+primitive-ui.workspace = true
