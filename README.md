@@ -1,13 +1,64 @@
+<div align="center">
+
 # Primitive Minesweeper
 
-Clear the 9 × 9, 16 × 16, or 16 × 30 minefield. Tap to reveal a square, or hold it to place a flag. **Flag mode**
-lets you flag with a tap. The first revealed square and its neighbors are safe. Scroll larger boards with swipes or
-the arrow buttons. The app keeps your game and best time at each size, and pauses the timer when the Kindle sleeps.
+**Minesweeper for jailbroken Kindle e-readers.**
+
+[**Install guide**](INSTALL.md) ·
+[**Device notes**](docs/device-notes.md) ·
+[**Changelog**](CHANGELOG.md)
+
+</div>
+
+---
+
+Tap to reveal squares and hold to flag suspected mines. The first revealed square and its neighbors are safe.
+
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/images/minesweeper-game-dark.png" alt="Beginner minefield in dark mode with revealed numbers and one flag" width="260"><br><sub>A beginner game in dark mode</sub></td>
+    <td align="center"><img src="docs/images/minesweeper-new.png" alt="New game dialog showing the three minefield sizes" width="260"><br><sub>Choose a board size</sub></td>
+    <td align="center"><img src="docs/images/minesweeper-expert.png" alt="Part of the expert minefield with navigation buttons below it" width="260"><br><sub>Navigate the expert board</sub></td>
+  </tr>
+</table>
+
+<sub>Screenshots from the desktop simulator at 1264 × 1680, using sample games.</sub>
+
+## Highlights
+
+- **Three board sizes.** Play Beginner (9 × 9), Intermediate (16 × 16), or Expert (16 × 30).
+- **Tap to flag.** Switch on Flag mode to place flags without holding.
+- **Scrollable boards.** Swipe or use the arrow buttons to reach the rest of a larger minefield.
+- **Saved games and best times.** Resume your board and track the fastest win at each size. The timer pauses when
+  the Kindle sleeps.
+
+## Quick start
+
+For a local USB test, extract the ARMHF test package and copy the `minesweeper` and `documents` folders to the
+Kindle's user storage. Eject the Kindle and open Primitive Minesweeper from the Primitive Launcher grid.
+The app uses fonts installed with Primitive Launcher. [Install guide](INSTALL.md)
+
+## Status
+
+Desktop tests and previews passed on macOS, and the ARMHF package passed the local Store fixture.
+Kindle hardware verification is pending. `app.json` contains the draft Store listing. [Device notes](docs/device-notes.md)
 
 ## Develop locally
 
-Run `cargo test --offline --workspace` and `cargo run --offline -p minesweeper-desktop` from this directory, with the
-Primitive Tools and Launcher repositories beside it. The desktop target runs sample touch, timer, and navigation
-interactions and writes previews in `build/previews`.
+Keep the Primitive Tools and Launcher repositories beside this checkout. The desktop command runs sample touch,
+timer, and navigation interactions and writes PNG previews to `build/previews`.
 
-See [INSTALL.md](INSTALL.md) and [device notes](docs/device-notes.md). `app.json` contains draft listing copy.
+```sh
+cargo test --offline --locked --workspace
+cargo run --offline --locked -p minesweeper-desktop
+```
+
+## Licence
+
+Copyright (C) 2026 Doan Nguyen.
+
+- Original code is under the [PolyForm Noncommercial License 1.0.0](LICENSE).
+- Original documentation and pictures, including these screenshots, are under [CC BY-NC-SA 4.0](LICENSE-DOCS).
+- The Noto Sans fonts supplied by Primitive Launcher retain their SIL Open Font License.
