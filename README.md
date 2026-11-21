@@ -2,17 +2,22 @@
 
 # Minesweeper
 
-**Minesweeper for jailbroken Kindle e-readers.**
+**Clear a minefield on e-ink**
 
-[**Install guide**](INSTALL.md) ·
-[**Device notes**](docs/device-notes.md) ·
-[**Changelog**](CHANGELOG.md)
+[![Release](https://img.shields.io/github/v/release/PrimitiveOS/kindle-primitive-minesweeper?label=release)](https://github.com/PrimitiveOS/kindle-primitive-minesweeper/releases) [![Licence: PolyForm-Noncommercial-1.0.0](https://img.shields.io/badge/licence-PolyForm--Noncommercial--1.0.0-blue)](LICENSE) [![Store downloads](https://img.shields.io/badge/Store%20downloads-34-brightgreen)](https://primitiveos.github.io/kindle-primitive-catalog/v1/index.json)
+
+[**Download**](https://github.com/PrimitiveOS/kindle-primitive-minesweeper/releases/latest) · [**Install guide**](INSTALL.md) · [**Changelog**](CHANGELOG.md)
 
 </div>
 
 ---
 
-Tap to reveal squares and hold to flag suspected mines. The first revealed square and its neighbors are safe.
+Play three classic board sizes and track your best times. Tap to reveal and hold a square to flag it. The first square is safe, and larger boards can be explored by swiping.
+
+## Quick start
+
+After setting up PrimitiveOS, open **Store** from Primitive Launcher. Choose **Minesweeper** under **Apps**,
+tap **Get**, and open it from the Launcher grid. The [install guide](INSTALL.md) also covers the standalone USB package.
 
 ## Screenshots
 
@@ -34,18 +39,6 @@ Tap to reveal squares and hold to flag suspected mines. The first revealed squar
 - **Saved games and best times.** Resume your board and track the fastest win at each size. The timer pauses when
   the Kindle sleeps.
 
-## Quick start
-
-After setting up PrimitiveOS, open **Store** from Primitive Launcher. Choose **Minesweeper** under **Apps**,
-tap **Get**, and open it from the Launcher grid. The [install guide](INSTALL.md) also covers local USB testing.
-
-## Status
-
-Desktop tests and previews passed on macOS, and the ARMHF package passed the local Store fixture.
-On an ARMHF Kindle Oasis 3 running firmware 5.18.2, Minesweeper opened from Launcher, showed and closed Best
-times with the board unchanged, then returned to Launcher. `app.json` contains the draft Store listing. [Device
-notes](docs/device-notes.md)
-
 ## Develop locally
 
 Keep the Primitive Tools and Launcher repositories beside this checkout. The desktop command runs sample touch,
@@ -55,6 +48,23 @@ timer, and navigation interactions and writes PNG previews to `build/previews`.
 cargo test --offline --locked --workspace
 cargo run --offline --locked -p minesweeper-desktop
 ```
+
+## Status
+
+| Device | Status |
+|---|---|
+| Kindle Oasis 3 (1264 × 1680, firmware 5.18.2) | Tested on hardware |
+
+**Current version: 0.1.1.** Changes are in [CHANGELOG.md](CHANGELOG.md).
+
+## Downloads
+
+**34 downloads** from Store, as of 2026-11-21. Store shows the same count on the app page.
+The count is GitHub downloads of this app's release packages, from the [Store catalog](https://primitiveos.github.io/kindle-primitive-catalog/v1/index.json).
+
+## Documentation
+
+[Install guide](INSTALL.md) · [Changelog](CHANGELOG.md) · [Device notes](docs/device-notes.md)
 
 ## Licence
 
