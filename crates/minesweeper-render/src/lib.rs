@@ -256,7 +256,7 @@ fn clock(seconds: u64) -> String {
 impl App for View {
     fn draw(&self, canvas: &mut Canvas) {
         let w = canvas.bounds().w;
-        header(canvas, "Minesweeper", "Done");
+        header(canvas, "Minesweeper", "Exit");
         let (rows, columns, mines) = self.game.difficulty().size();
         let timer = format!(
             "{} · {} × {} · {} mines",
