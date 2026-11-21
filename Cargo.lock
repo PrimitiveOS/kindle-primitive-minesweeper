@@ -578,14 +578,14 @@ dependencies = [
 
 [[package]]
 name = "minesweeper-core"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "serde",
 ]
 
 [[package]]
 name = "minesweeper-desktop"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "minesweeper-core",
  "minesweeper-render",
@@ -595,7 +595,7 @@ dependencies = [
 
 [[package]]
 name = "minesweeper-kindle"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "minesweeper-core",
  "minesweeper-render",
@@ -604,7 +604,7 @@ dependencies = [
 
 [[package]]
 name = "minesweeper-render"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "minesweeper-core",
  "primitive-app",
